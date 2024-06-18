@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func RunProcessor(wg sync.WaitGroup, prices []map[string]float64) {
+func RunProcessor(wg *sync.WaitGroup, prices []map[string]float64) {
 	go func() {
 		defer wg.Done()
 		for _, price := range prices {
@@ -28,10 +28,12 @@ func RunWriter() <-chan map[string]float64 {
 			"inst4": 4.1,
 		}
 		for i := 1; i < 5; i++ {
+			// Создаем новую мапу, чтобы избежать гонок данных
+			newPrice := make(map[string]float64)
 			for key, value := range currentPrice {
-				currentPrice[key] = value + 1
+				newPrice[key] = value + 1
 			}
-			prices <- currentPrice
+			prices <- newPrice
 			time.Sleep(time.Second)
 		}
 		close(prices)
@@ -50,10 +52,12 @@ func main() {
 		fmt.Println(price)
 	}
 
-	wg := sync.WaitGroup{}
+	var wg sync.WaitGroup
 	wg.Add(3)
-	RunProcessor(wg, prices)
-	RunProcessor(wg, prices)
-	RunProcessor(wg, prices)
+
+	RunProcessor(&wg, prices)
+	RunProcessor(&wg, prices)
+	RunProcessor(&wg, prices)
+
 	wg.Wait()
 }
