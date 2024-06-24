@@ -2,19 +2,22 @@ package main
 
 import (
 	"fmt"
+	"maps"
 	"sync"
 	"time"
 )
 
-func RunProcessor(wg *sync.WaitGroup, prices []map[string]float64) {
+func RunProcessor(wg *sync.WaitGroup, mu *sync.Mutex, prices []map[string]float64) {
 	go func() {
 		defer wg.Done()
+		mu.Lock()
 		for _, price := range prices {
 			for key, value := range price {
 				price[key] = value + 1
 			}
 			fmt.Println(price)
 		}
+		mu.Unlock()
 	}()
 }
 
@@ -29,11 +32,11 @@ func RunWriter() <-chan map[string]float64 {
 		}
 		for i := 1; i < 5; i++ {
 			// Создаем новую мапу, чтобы избежать гонок данных
-			newPrice := make(map[string]float64)
 			for key, value := range currentPrice {
-				newPrice[key] = value + 1
+				currentPrice[key] = value + 1
 			}
-			prices <- newPrice
+			prices <- maps.Clone(currentPrice)
+
 			time.Sleep(time.Second)
 		}
 		close(prices)
@@ -48,6 +51,8 @@ func main() {
 		prices = append(prices, price)
 	}
 
+	var mutex sync.Mutex
+
 	for _, price := range prices {
 		fmt.Println(price)
 	}
@@ -55,9 +60,9 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(3)
 
-	RunProcessor(&wg, prices)
-	RunProcessor(&wg, prices)
-	RunProcessor(&wg, prices)
+	RunProcessor(&wg, &mutex, prices)
+	RunProcessor(&wg, &mutex, prices)
+	RunProcessor(&wg, &mutex, prices)
 
 	wg.Wait()
 }

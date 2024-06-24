@@ -32,28 +32,28 @@ map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
 
 ```
 map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
+map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
+map[inst1:4.1 inst2:5.1 inst3:6.1 inst4:7.1]
+map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
 ```
 
 ### Вывод после удаления комментариев:
 
 ```
 map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:2.1 inst2:3.1 inst3:4.1 inst4:5.1]
-map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
-map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
-map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
 map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
 map[inst1:4.1 inst2:5.1 inst3:6.1 inst4:7.1]
+map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
+map[inst1:3.1 inst2:4.1 inst3:5.1 inst4:6.1]
 map[inst1:4.1 inst2:5.1 inst3:6.1 inst4:7.1]
+map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
+map[inst1:6.1 inst2:7.1 inst3:8.1 inst4:9.1]
 map[inst1:4.1 inst2:5.1 inst3:6.1 inst4:7.1]
-map[inst1:4.1 inst2:5.1 inst3:6.1 inst4:7.1]
 map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
+map[inst1:6.1 inst2:7.1 inst3:8.1 inst4:9.1]
+map[inst1:7.1 inst2:8.1 inst3:9.1 inst4:10.1]
 map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
-map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
-map[inst1:5.1 inst2:6.1 inst3:7.1 inst4:8.1]
+map[inst1:6.1 inst2:7.1 inst3:8.1 inst4:9.1]
+map[inst1:7.1 inst2:8.1 inst3:9.1 inst4:10.1]
+map[inst1:8.1 inst2:9.1 inst3:10.1 inst4:11.1]
 ```
